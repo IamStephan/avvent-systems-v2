@@ -37,22 +37,18 @@ module.exports = {
   },
 
   methods: {
-    generateToken: require('./methods/generateToken.method'),
-    verifyToken: require('./methods/verifyToken.method'),
-
-    generatePasswordResetId: require('./methods/generatePasswordResetId.method'),
-    setPasswordResetId: require('./methods/setPasswordResetId.method'),
-    addRefreshTokenById: require('./methods/addRefreshTokenById.method'),
-    addRefreshTokenByUserId: require('./methods/addRefreshTokenByUserId.method'),
+    addRefreshToken: require('./methods/addRefreshToken.method'),
+    authExists: require('./methods/authExists.method'),
     comparePassword: require('./methods/comparePassword.method'),
-    createAuthEntity: require('./methods/createAuthEntity.method'),
-    entityExistByUser: require('./methods/entityExistByUser.method'),
-    generatedHashedPassword: require('./methods/generateHashedPassword.method'),
-    getAuthEntityByUserId: require('./methods/getAuthEntityByUserId.method'),
+    createAuth: require('./methods/createAuth.method'),
+    generatePassword: require('./methods/generatePassword.method'),
+    generateToken: require('./methods/generateToken.method'),
+    getAuth: require('./methods/getAuth.method'),
     refreshTokenExists: require('./methods/refreshTokenExists.method'),
-    removeAllRefreshTokens: require('./methods/removeAllRefreshTokens.method'),
-    removeAuthEntity: require('./methods/removeAuthEnity.method'),
+    removeAuth: require('./methods/removeAuth.method'),
     removeRefreshToken: require('./methods/removeRefreshToken.method'),
+    updateAuth: require('./methods/updateAuth.method'),
+    verifyToken: require('./methods/verifyToken.method'),
   },
 
   events: {

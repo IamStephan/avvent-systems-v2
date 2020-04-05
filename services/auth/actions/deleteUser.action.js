@@ -53,10 +53,12 @@ module.exports = {
       throw new MoleculerError('Credentials are incorrect', 401, 'Credentials are incorrect')
     }
 
-    const authEntityExists = await this.entityExistByUser(user._id)
+    const user_id = user._id
+
+    const authEntityExists = await this.authExists({ user_id })
 
     if(authEntityExists) {
-      let authEnitity = await this.getAuthEntityByUserId(user._id)
+      let authEnitity = await this.getAuth({ user_id })
       await this.removeAuthEntity(authEnitity._id)
     }
 

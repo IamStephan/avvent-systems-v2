@@ -73,7 +73,28 @@ module.exports = {
 
   async handler(ctx) {
     const { first_name, last_name, username, email, password } = ctx.params
-    const password_h = await this.generatedHashedPassword(password)
+    
+    const emailExists = await ctx.call('v1.users.userExists', {
+      email
+    })
+
+    const usernameExists = await ctx.call('v1.users.userExists', {
+      username
+    })
+
+    if(usernameExists && emailExists) {
+      throw new MoleculerError('User already exists', 409)
+    }
+
+    if(emailExists) {
+      throw new MoleculerError('User with that email already exists', 409)
+    }
+
+    if(usernameExists) {
+      throw new MoleculerError('User with that username already exists', 409)
+    }
+
+    const password_h = await this.generatePassword({ type: 'hash', password })
 
     const created_user = await ctx.call('v1.users.createNewUser', {
       first_name,
@@ -83,18 +104,20 @@ module.exports = {
       password: password_h
     })
 
-    const authEntityExists = await this.entityExistByUser(created_user._id)
+    const user_id = created_user._id
+
+    const authEntityExists = await this.authExists({ user_id })
 
     if(authEntityExists) {
-      throw new MoleculerError('Seems like user does exist', 409, 'Seems like user does exist')
+      throw new MoleculerError('Seems like user already exist', 409)
     }
 
     const access_token = this.generateToken({ type: 'access', user_id: created_user._id, verified: created_user.verified })
     const refresh_token = this.generateToken({ type: 'refresh', user_id: created_user._id })
 
-    const authEntity = await this.createAuthEntity(created_user._id)
+    const authEntity = await this.createAuth({ user_id })
 
-    await this.addRefreshTokenById(authEntity._id, refresh_token)
+    await this.addRefreshToken(authEntity._id, { refresh_token })
 
     return {
       access_token,

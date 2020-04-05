@@ -67,7 +67,9 @@ module.exports = {
       throw new MoleculerError('User not found', 404)
     }
 
-    let auth_entity = await this.getAuthEntityByUserId(user._id)
+    let user_id = user._id
+
+    let auth_entity = await this.getAuth({ user_id })
 
     if(!auth_entity) {
       throw new MoleculerError('User did not request a password reset', 404)
@@ -85,7 +87,9 @@ module.exports = {
 
     const new_password_h = await this.generatedHashedPassword(new_password)
 
-    await this.setPasswordResetId(auth_entity._id.toString(), '')
+    let auth_id = auth_entity._id
+    
+    await this.updateAuth(auth_id, { reset_password_id: '' })
 
     await ctx.call('v1.users.resetPassword', {
       user_id: user._id.toString(),

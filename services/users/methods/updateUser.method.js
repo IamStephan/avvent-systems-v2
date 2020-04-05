@@ -21,7 +21,13 @@ module.exports = async function( user_id, { first_name, last_name, email, verifi
     updates.password = password
   }
 
-  let user = await this.adapter.updateById(user_id, {
+  let checked_user_id = user_id
+
+  if(typeof checked_user_id === 'object') {
+    checked_user_id = this.adapter.objectIDToString(user_id)
+  }
+
+  let user = await this.adapter.updateById(checked_user_id, {
     $set: {
       ...updates
     }

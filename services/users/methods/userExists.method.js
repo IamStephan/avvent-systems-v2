@@ -1,11 +1,16 @@
-module.exports = async function({ id, email, username }) {
+module.exports = async function({ user_id, email, username }) {
   let count
 
-  if(id) {
-    // Check if this works!!
+  if(user_id) {
+    let checked_id = user_id
+
+    if(typeof user_id === 'string') {
+      checked_id = this.adapter.stringToObjectID(user_id)
+    }
+
     count = await this.adapter.count({
       query: {
-        _id: id
+        _id: checked_id
       }
     })
   } else if(email) {

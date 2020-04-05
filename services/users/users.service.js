@@ -35,6 +35,7 @@ module.exports = {
     // updateUser
 
     // Public
+    userExists: { ...require('./actions/userExists.action') },
     createNewUser: { ...require('./actions/createNewUser.action') },
     getUserSensitive: { ...require('./actions/getUserSensitive.action') },
     removeUser: { ...require('./actions/removeUser.action') },

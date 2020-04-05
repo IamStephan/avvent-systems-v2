@@ -39,22 +39,29 @@ module.exports = {
       throw new MoleculerError('User does not exist', 404, 'User does not exist')
     }
 
-    let comparison = await this.comparePassword(password, user.password)
+    let hashed = user.password
+
+    let comparison = await this.comparePassword({password, hashed})
 
     if(!comparison) {
       throw new MoleculerError('Credentials are incorrect', 401, 'Credentials are incorrect')
     }
 
-    const authEntityExists = await this.entityExistByUser(user._id)
+    const user_id = user._id
+
+    const authEntityExists = await this.authExists({ user_id })
  
     const access_token = this.generateToken({ type: 'access', user_id: user._id, verified: user.verified })
     const refresh_token = this.generateToken({ type: 'refresh', user_id: user._id })
 
     if(!authEntityExists) {
-      await this.createAuthEntity(user._id)
+      let user_id = user._id
+      await this.createAuth({ user_id })
     }
 
-    await this.addRefreshTokenByUserId(refresh_token, user._id)
+    let auth = await this.getAuth({ user_id })
+
+    await this.addRefreshToken(auth._id, {refresh_token})
 
     return {
       access_token,

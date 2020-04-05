@@ -1,5 +1,3 @@
-const { ObjectId } = require('mongodb')
-
 module.exports = {
   visibility: 'published',
 
@@ -16,9 +14,10 @@ module.exports = {
   async handler(ctx) {
     const { refresh_token, universal } = ctx.params
 
-    const user_id = this.verifyToken({ type: 'refresh', refresh_token })
+    const decoded_user_id = this.verifyToken({ type: 'refresh', refresh_token })
 
-    const authEntity = await this.getAuthEntityByUserId(ObjectId(user_id.id))
+    const user_id = decoded_user_id.id
+    const authEntity = await this.getAuth({ user_id })
 
     if(universal === true) {
       await this.removeAllRefreshTokens(authEntity._id)

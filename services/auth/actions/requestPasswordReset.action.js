@@ -19,14 +19,16 @@ module.exports = {
       throw new MoleculerError('User not found', 404)
     }
 
-    let auth_entity = await this.getAuthEntityByUserId(user._id)
+    let user_id = user._id
+
+    let auth_entity = await this.getAuth({ user_id })
 
     if(!auth_entity) {
       auth_entity = await this.createAuthEntity(user._id)
     }
 
-    const password_reset_id = this.generatePasswordResetId()
+    const reset_password_id = this.generatePasswordResetId()
     
-    await this.setPasswordResetId(auth_entity._id.toString(), password_reset_id)
+    await this.updateAuth(auth_entity._id, { reset_password_id })
   }
 }
