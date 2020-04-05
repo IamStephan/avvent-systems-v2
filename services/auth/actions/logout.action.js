@@ -19,10 +19,8 @@ module.exports = {
     const user_id = decoded_user_id.id
     const authEntity = await this.getAuth({ user_id })
 
-    if(universal === true) {
-      await this.removeAllRefreshTokens(authEntity._id)
-    } else {
-      await this.removeRefreshToken(authEntity._id, refresh_token)
-    }
+    const updated_auth = await this.removeRefreshToken(authEntity._id, { refresh_token, universal })
+
+    return updated_auth
   }
 }

@@ -16,7 +16,7 @@ module.exports = {
     const user_id = decoded_refresh.id
     const user = await ctx.call('v1.users.getUser', { user_id })
 
-    const refresh_tokenExists = await this.refreshTokenExists(ObjectId(user._id), refresh_token)
+    const refresh_tokenExists = await this.refreshTokenExists({user_id , refresh_token})
 
     if(!refresh_tokenExists) {
       throw new MoleculerError('Not Authorized', 401)

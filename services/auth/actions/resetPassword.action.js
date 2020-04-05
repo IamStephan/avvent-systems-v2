@@ -75,8 +75,6 @@ module.exports = {
       throw new MoleculerError('User did not request a password reset', 404)
     }
 
-    console.log(auth_entity)
-
     if(!auth_entity.reset_password_id) {
       throw new MoleculerError('User did not request a password reset', 404)
     }
@@ -85,11 +83,13 @@ module.exports = {
       throw new MoleculerError('Not a valid reset id', 409)
     }
 
-    const new_password_h = await this.generatedHashedPassword(new_password)
+    const password = new_password
+    const new_password_h = await this.generatePassword({type: 'hash', password})
 
     let auth_id = auth_entity._id
     
     await this.updateAuth(auth_id, { reset_password_id: '' })
+    await this.removeRefreshToken(auth_id, { universal: true })
 
     await ctx.call('v1.users.resetPassword', {
       user_id: user._id.toString(),

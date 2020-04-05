@@ -27,7 +27,7 @@ module.exports = {
       auth_entity = await this.createAuthEntity(user._id)
     }
 
-    const reset_password_id = this.generatePasswordResetId()
+    const reset_password_id = await this.generatePassword({ type: 'reset' })
     
     await this.updateAuth(auth_entity._id, { reset_password_id })
   }

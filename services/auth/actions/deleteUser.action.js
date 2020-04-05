@@ -47,7 +47,9 @@ module.exports = {
       throw new MoleculerError('Refresh token and user do not match', 401)
     }
 
-    let comparison = await this.comparePassword(password, user.password)
+    const hashed = user.password
+
+    let comparison = await this.comparePassword({password, hashed})
 
     if(!comparison) {
       throw new MoleculerError('Credentials are incorrect', 401, 'Credentials are incorrect')
@@ -59,7 +61,8 @@ module.exports = {
 
     if(authEntityExists) {
       let authEnitity = await this.getAuth({ user_id })
-      await this.removeAuthEntity(authEnitity._id)
+      const auth_id = authEnitity._id
+      await this.removeAuth({ auth_id })
     }
 
     await ctx.call('v1.users.removeUser', {
