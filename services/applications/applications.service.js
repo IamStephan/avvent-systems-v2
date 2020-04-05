@@ -22,7 +22,7 @@ module.exports = {
     //public 'admin'
 
     addAppDefinition: {...require('./actions/addAppDefinition.action')},
-    //removeAppDefinition
+    removeAppDefinition:{...require('./actions/removeAppDefinition.actions')},
     getAppDefinitions: {...require('./actions/getAppDefinitions.action')},
     appExists: {...require('./actions/appExists.action')}
 
@@ -30,9 +30,9 @@ module.exports = {
   methods:{
     createApp: require('./methods/createApp.method'),
     appExists: require('./methods/appExists.method'),
-    //updateApp
-    //removeApp
-    getApps: require('./methods/getApps.method')
+    //updateApp onseker
+    removeApp: require('./methods/removeApp.method'),
+    getApps: require('./methods/getApps.method'),
 
   }
 };
