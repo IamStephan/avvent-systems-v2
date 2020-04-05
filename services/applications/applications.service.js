@@ -23,15 +23,16 @@ module.exports = {
 
     addAppDefinition: {...require('./actions/addAppDefinition.action')},
     //removeAppDefinition
-    //getAppDefinition
+    getAppDefinitions: {...require('./actions/getAppDefinitions.action')},
+    appExists: {...require('./actions/appExists.action')}
+
   },
   methods:{
     createApp: require('./methods/createApp.method'),
     appExists: require('./methods/appExists.method'),
-    //getApp
     //updateApp
     //removeApp
-    //getApps
+    getApps: require('./methods/getApps.method')
 
   }
 };
