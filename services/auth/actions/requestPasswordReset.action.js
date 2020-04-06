@@ -30,5 +30,11 @@ module.exports = {
     const reset_password_id = await this.generatePassword({ type: 'reset' })
     
     await this.updateAuth(auth_entity._id, { reset_password_id })
+
+    this.broker.emit('auth.passwordRequestId', {
+      email,
+      name: `${user.first_name} ${user.last_name}`,
+      reset_password_id
+    })
   }
 }

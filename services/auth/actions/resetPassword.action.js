@@ -96,5 +96,10 @@ module.exports = {
       new_password: new_password_h
     })
 
+    this.broker.emit('auth.passwordReset', {
+      email,
+      name: `${user.first_name} ${user.last_name}`
+    })
+
   }
 }

@@ -119,6 +119,12 @@ module.exports = {
 
     await this.addRefreshToken(authEntity._id, { refresh_token })
 
+    this.broker.emit('auth.verify', {
+      email,
+      name: `${first_name} ${last_name}`,
+      verify_id: created_user.verify_id
+    })
+
     return {
       access_token,
       refresh_token
