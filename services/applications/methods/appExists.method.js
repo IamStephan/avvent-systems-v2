@@ -1,4 +1,4 @@
-module.exports = async function({ app_name,version }){
+module.exports = async function({ app_name, version }){
   const count = await this.adapter.count({ 
     query: {
       app_name,

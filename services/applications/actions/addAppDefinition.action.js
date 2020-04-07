@@ -18,28 +18,27 @@ module.exports = {
     packages:{
       type: 'array',
       items: 'string',
-      optional: true
+      min: 1
     }
 
   },
   async handler(ctx){
-    const {app_name,version,roles,packages} = ctx.params
+    const { app_name, version, roles, packages } = ctx.params
 
-    const appExists = await this.appExists({app_name,version})
+    const appExists = await this.appExists({ app_name, version })
 
     if(appExists){
-      throw new MoleculerError('App already exists.',409)
+      throw new MoleculerError('App already exists', 409)
     }
 
     let appDefinition ={
       app_name,
-      version
+      version,
+      packages
     }
+
     if(roles){
       appDefinition.roles = roles
-    }
-    if(packages){
-      appDefinition.packages = packages
     }
 
     const createdAppDefinition = await this.createApp({ ...appDefinition })
