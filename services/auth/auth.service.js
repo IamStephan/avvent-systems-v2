@@ -27,7 +27,7 @@ module.exports = {
     deleteUser: require('./actions/deleteUser.action'),
     login: require('./actions/login.action'),
     logout: require('./actions/logout.action'),
-    signup: require('./actions/signup.actions'),
+    signup: require('./actions/signup.action'),
     token: require('./actions/token.action'),
     requestPasswordReset: require('./actions/requestPasswordReset.action'),
     resetPassword: require('./actions/resetPassword.action'),
