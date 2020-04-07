@@ -24,16 +24,16 @@ module.exports = {
 
   actions: {
     // Published
-    deleteUser: { ...require('./actions/deleteUser.action') },
-    login: { ...require('./actions/login.action') },
-    logout: { ...require('./actions/logout.action') },
-    signup: { ...require('./actions/signup.actions') },
-    token: { ...require('./actions/token.action') },
-    requestPasswordReset: { ...require('./actions/requestPasswordReset.action') },
-    resetPassword: { ...require('./actions/resetPassword.action') },
+    deleteUser: require('./actions/deleteUser.action'),
+    login: require('./actions/login.action'),
+    logout: require('./actions/logout.action'),
+    signup: require('./actions/signup.actions'),
+    token: require('./actions/token.action'),
+    requestPasswordReset: require('./actions/requestPasswordReset.action'),
+    resetPassword: require('./actions/resetPassword.action'),
 
     // Public
-    authorize: { ...require('./actions/authorize.action') }
+    authorize: require('./actions/authorize.action')
   },
 
   methods: {

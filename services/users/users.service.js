@@ -30,16 +30,16 @@ module.exports = {
 
   actions: {
     // Published
-    verifyUser: { ...require('./actions/verifyUser.action') },
-    getUser: { ...require('./actions/getUser.action') },
+    verifyUser: require('./actions/verifyUser.action'),
+    getUser: require('./actions/getUser.action'),
     // updateUser
 
     // Public
-    userExists: { ...require('./actions/userExists.action') },
-    createNewUser: { ...require('./actions/createNewUser.action') },
-    getUserSensitive: { ...require('./actions/getUserSensitive.action') },
-    removeUser: { ...require('./actions/removeUser.action') },
-    resetPassword: { ...require('./actions/resetPassword.action') },
+    userExists: require('./actions/userExists.action'),
+    createNewUser: require('./actions/createNewUser.action'),
+    getUserSensitive: require('./actions/getUserSensitive.action'),
+    removeUser: require('./actions/removeUser.action'),
+    resetPassword: require('./actions/resetPassword.action'),
   },
 
   methods: {

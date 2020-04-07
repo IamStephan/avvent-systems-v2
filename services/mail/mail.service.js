@@ -126,9 +126,9 @@ module.exports = {
   },
   
   events: {
-    'auth.verify': { ...require('./events/auth.verify') },
-    'auth.passwordRequestId': { ...require('./events/auth.passwordRequestId') },
-    'auth.passwordReset': { ...require('./events/auth.passwordReset') }
+    'auth.verify': require('./events/auth.verify'),
+    'auth.passwordRequestId': require('./events/auth.passwordRequestId'),
+    'auth.passwordReset': require('./events/auth.passwordReset')
   },
 
 

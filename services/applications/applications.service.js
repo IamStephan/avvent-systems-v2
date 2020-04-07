@@ -21,10 +21,10 @@ module.exports = {
     //published 'users'
     //public 'admin'
 
-    addAppDefinition: {...require('./actions/addAppDefinition.action')},
-    removeAppDefinition:{...require('./actions/removeAppDefinition.actions')},
-    getAppDefinitions: {...require('./actions/getAppDefinitions.action')},
-    appExists: {...require('./actions/appExists.action')}
+    addAppDefinition: require('./actions/addAppDefinition.action'),
+    removeAppDefinition:require('./actions/removeAppDefinition.actions'),
+    getAppDefinitions: require('./actions/getAppDefinitions.action'),
+    appExists: require('./actions/appExists.action')
 
   },
   methods:{
